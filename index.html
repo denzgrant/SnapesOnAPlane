@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css" />
 
-    <!-- UIkit JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./styles.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script>
+    <script src="uikit/dist/js/uikit-icons.min.js"></script>
+    <script src="script.js"></script>
+
     <title>Dine-In or Dine-Out</title>
 </head>
 
@@ -19,42 +22,70 @@
             <ul class="uk-navbar-nav">
                 <li class="uk-active uk-inline">
                     <button class="uk-button uk-button-default" type="button">About Us</button>
-                    <div uk-drop>
-                        <div class="uk-card uk-card-body uk-card-default">Project 1 made by Denzell, Hoover and
-                            Michelle</div>
+                    <div uk-dropdown>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
+                        and Michelle. This is our first project. I hope you like it. </div>
                 </li>
                 <li>
                     <button class="uk-button uk-button-default uk-margin-small-right" type="button"
-                        uk-toggle="target: #modal-example">Team Snapes</button>
-
-                    <!-- This is the modal -->
+                        uk-toggle="target: #modal-example">Team Name</button>
                     <div id="modal-example" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
-                            <h2 class="uk-modal-title">Team Name: Snapes on the Plane</h2>
+                            <h2 class="uk-modal-title">Snapes on the A Plane</h2>
                             <img
                                 src="https://pbs.twimg.com/profile_images/378800000408529086/5108c0356be611a5509f3d869c2dbd3d_400x400.jpeg">
                 </li>
+                <li>
+                    <button class="uk-button uk-margin-small-right" type="button"
+                        uk-toggle="target: #modal-example">Can't Decide?</button>
+                    <div id="coinFlip" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body">
+                            <h2 class="uk-modal-title">Let us help you with that with flip-a-coin</h2>
+                            <img
+                                src="https://image.shutterstock.com/image-vector/hand-flipping-coin-vector-illustration-260nw-1317073241.jpg" />
+                </li>
             </ul>
         </div>
+
     </nav>
     <div class="uk-container">
-        <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-animation-scale-up">Welcome!</h1>
-        <video src="https://yootheme.com/site/images/media/yootheme-pro.mp4" loop muted playsinline uk-video="autoplay: inview"></video>
-        <hr class="uk-divider-icon">
-        <dl class="uk-description-list uk-description-list-divider uk-animation-fade">
-            <dt class="uk-text-primary uk-text-center">Description term</dt>
-            <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</dd>
-
+        <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-animation-scale-up">Welcome to Dine-in or
+            Dine-out</h1>
+        <dl class="uk-description-list uk-description-list-divider uk-animation-fade uk-overlay">
+            <dt class="uk-text-primary uk-text-center ">Description</dt>
+            <dd>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit error fugiat, architecto ex hic quos
+                magni recusandae reiciendis ad placeat quis laboriosam! Illum provident exercitationem accusantium cum
+                sed, rerum quisquam.</dd>
         </dl>
+        <hr class="uk-divider-icon">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+            data-src="https://www.thespruceeats.com/thmb/LV4VRAPdilCLCQj7mi4m8PFxczI=/2164x1386/filters:fill(auto,1)/freshvegetablesAlexRaths-4c1ea186a88e4fd7b95283eee614600c.jpg"
+            uk-img>
+        </div>
+        <!-- <img src="https://www.thespruceeats.com/thmb/LV4VRAPdilCLCQj7mi4m8PFxczI=/2164x1386/filters:fill(auto,1)/freshvegetablesAlexRaths-4c1ea186a88e4fd7b95283eee614600c.jpg"
+            /> -->
+        <hr class="uk-divider-icon">
+
+
         <div class="uk-margin uk-text-center uk-animation-shake uk-margin-small-bottom uk-position-center">
-            <input class="uk-input uk-form-width-medium" type="text" placeholder="Search Food">
-            <button class="uk-button uk-button-primary">Submit</button>
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon:search"></span>
+                <input class="uk-input uk-form-width-medium" type="text" placeholder="Search Food">
+            </div>
+
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
+                <input class="uk-input uk-form-width-medium" type="text" placeholder="zip code">
+            </div>
+            <button class="uk-button uk-button-primary">Search </button>
         </div>
 
     </div>
-<footer class="uk-padding-small"style="background-color: aquamarine;">
-    <h6 class="uk-text-center">Made with lots of love</h6>
-</footer>
+
+
+
+    <footer class="uk-padding-small" style="background-color: aquamarine;">
+        <h6 class="uk-text-center">Made with lots of love</h6>
+    </footer>
 </body>
 
 </html>
