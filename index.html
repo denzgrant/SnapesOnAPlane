@@ -10,7 +10,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script>
-    <script src="uikit/dist/js/uikit-icons.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 
     <title>Dine-In or Dine-Out</title>
@@ -20,11 +22,6 @@
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li class="uk-active uk-inline">
-                    <button class="uk-button uk-button-default" type="button">About Us</button>
-                    <div uk-dropdown>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
-                        and Michelle. This is our first project. I hope you like it. </div>
-                </li>
                 <li>
                     <button class="uk-button uk-button-default uk-margin-small-right" type="button"
                         uk-toggle="target: #modal-example">Team Name</button>
@@ -34,22 +31,34 @@
                             <img
                                 src="https://pbs.twimg.com/profile_images/378800000408529086/5108c0356be611a5509f3d869c2dbd3d_400x400.jpeg">
                 </li>
-                <li>
-                    <button class="uk-button uk-margin-small-right" type="button"
-                        uk-toggle="target: #modal-example">Can't Decide?</button>
-                    <div id="coinFlip" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <h2 class="uk-modal-title">Let us help you with that with flip-a-coin</h2>
-                            <img
-                                src="https://image.shutterstock.com/image-vector/hand-flipping-coin-vector-illustration-260nw-1317073241.jpg" />
+                <li class="uk-active uk-inline">
+                    <button class="uk-button uk-button-default" type="button">About Us</button>
+                    <div uk-dropdown>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
+                        and Michelle. This is our first project. I hope you like it. </div>
+                </li>
+                <li class="uk-inline">
+                    <div >
+                        <button class="uk-button uk-button-default" type="button">Cant decide??</button>
+                        <div uk-drop="pos: right-center">
+                            <div class="uk-card uk-card-body uk-card-default">
+                                <p>Let us help you with that by flipping a coin <span uk-icon="icon: happy"></span></p>
+                                <button id="coinToss" class="uk-button uk-button-primary">Coin</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
 
     </nav>
     <div class="uk-container">
-        <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-animation-scale-up">Welcome to Dine-in or
-            Dine-out</h1>
+        <header>
+            <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-animation-scale-up uk-margin-small-top">
+                Welcome to Dine-in or
+                Dine-out</h1>
+        </header>
+
         <dl class="uk-description-list uk-description-list-divider uk-animation-fade uk-overlay">
             <dt class="uk-text-primary uk-text-center ">Description</dt>
             <dd>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit error fugiat, architecto ex hic quos
@@ -83,8 +92,8 @@
 
 
 
-    <footer class="uk-padding-small" style="background-color: aquamarine;">
-        <h6 class="uk-text-center">Made with lots of love</h6>
+    <footer class="uk-padding-small uk-sticky">
+        <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
     </footer>
 </body>
 
