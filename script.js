@@ -134,6 +134,53 @@ $(document).ready(function () {
 
         });
 
+        let zomatoSearchQueryURL = "https://developers.zomato.com/api/v2.1/search?lat=33.448376&lon=-112.074036&cuisines=25&category=25";
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "user-key": zomatoAPIkey
+            },
+            url: zomatoSearchQueryURL,
+            method: "GET"
+        })
+    
+            .then(function (searchResponse) {
+    
+                console.log(searchResponse);
+              
+    
+            });
+            
+            $(document ).ready(function() {
+                ​
+                    const apiKey = "&app_key=7f3dde61a010db79ca5ad499826e8d8";
+                    const appId = "&app_id= 5c5c0f98&";
+                    const queryURLsearch = "https://api.edamam.com/search?q="
+                ​
+                    $("#searchBtn").on("click", function(){ 
+                    var searchFood = $("#foodInput").val();
+                    $.ajax({
+                        url: "https://api.edamam.com/search?q="+ searchFood +"&app_id=6ed8e227&app_key=b625542fdcf8fe77f73a1d01bbcbe005",
+                ​
+                        // "https://api.edamam.com/search?=chicken&app_id=4a5d81a2&app_key=379308ab9da9a8ee47f63563d2774ac4&from=0&to=9&q=",
+                        // queryURLsearch + searchTerm +appdId +apiKey +"form=0&to=5&",
+                        method:"GET"
+                    }).then( function(response){
+                        console.log(response)
+                        // console.log(response.hits[0].recipe);
+                        // console.log(response.hits[0].recipe.dietLabels)
+                        // console.log(response.hits[0].recipe.healthLabels)
+                    })  
+                    // function recipesCall(){
+                      
+                    // }
+                         
+                    })
+                   
+                
+
+
 
     //We would have to use SmartyStreets to get the long and lat and then /cuisines
 
