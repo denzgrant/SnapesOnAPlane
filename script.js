@@ -208,11 +208,5 @@ $(document).ready(function () {
     //     //longitude
     //     console.log(zipcodeResponse[0].zipcodes[0].longitude);
 
-<<<<<<< HEAD
-});
-
-
-=======
     // });
 });
->>>>>>> 0e8ff75277eb98c2c90230be0c1c21fc4edaadd0
