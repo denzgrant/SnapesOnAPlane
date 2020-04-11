@@ -110,32 +110,32 @@ $(document).ready(function () {
 
     };
 
-    function searchZomato(lat, lon, searchFood) {
-        //**********************************************************************************
-        //***USE LATLON & CUISINE
-        // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
-        //*********************************************************************************
+    // function searchZomato(lat, lon, searchFood) {
+    //     //**********************************************************************************
+    //     //***USE LATLON & CUISINE
+    //     // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
+    //     //*********************************************************************************
 
-        var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
-        // cuisines = "25";
+    //     var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
+    //     // cuisines = "25";
 
-        let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?lat="+ lat + "&lon=" + lon + "&cuisines=25&category=25";
-        let cuisineFromEdamam = 0;
-        $.ajax({
-            headers: {
-                "Accept": "application/json",
-                "user-key": zomatoAPIkey
-            },
-            url: zomatoCuisinesQueryURL,
-            method: "GET"
-        })
+    //     let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?lat="+ lat + "&lon=" + lon + "&cuisines=25&category=25";
+    //     let cuisineFromEdamam = 0;
+    //     $.ajax({
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "user-key": zomatoAPIkey
+    //         },
+    //         url: zomatoCuisinesQueryURL,
+    //         method: "GET"
+    //     })
 
-            .then(function (searchResponse) {
+    //         .then(function (searchResponse) {
 
-                console.log(searchResponse);
+    //             console.log(searchResponse);
 
-            });
-    };
+    //         });
+    // };
 
 
 });
