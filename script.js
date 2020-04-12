@@ -15,7 +15,9 @@ $(document).ready(function () {
             // searchZomato(lat,lon, searchFood);
 
         })
-        
+
+        searchZomato(searchFood);
+
 
     });
 
@@ -25,15 +27,15 @@ $(document).ready(function () {
     //  Spoonacular - Michelle
     //********************************************************************************
 
- 
 
-    function searchSpoonacular(searchFood){
+
+    function searchSpoonacular(searchFood) {
         const spoonAPIKey = "e549d6e9b38545a3a604db06b9006011";
-        const spoonQueryURL = 
-        "https://api.spoonacular.com/recipes/random" +
-        // searchfood +
-        "?apiKey=" +
-        spoonAPIKey;
+        const spoonQueryURL =
+            "https://api.spoonacular.com/recipes/random" +
+            // searchfood +
+            "?apiKey=" +
+            spoonAPIKey;
 
         $.ajax({
             url: spoonQueryURL,
@@ -43,13 +45,11 @@ $(document).ready(function () {
             .then(function (spoonResponse) {
 
                 console.log(spoonResponse);
-            
+
 
             });
 
     };
-
-
 
 
 
@@ -61,7 +61,7 @@ $(document).ready(function () {
         //*********************************************************************************   
         // user openWetherApp - additional calls vs Smarty Streats?
         // consider using Geolocation API in addition/alternative to this? 
-        
+
 
         // curl example api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={your api key}
         let openWeatherapiKey = "b52ce1773e76080cb950272fcf749391";
@@ -85,9 +85,54 @@ $(document).ready(function () {
 
             });
 
+
     };
 
-    // function searchZomato(lat, lon, searchFood) {
+    function searchZomato(searchFood) {
+
+        //**********************************************************************************
+        //***USE LATLON & CUISINE
+        // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
+        //*********************************************************************************
+
+        var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
+        // cuisines = "25";
+
+        let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?q=" + searchFood;
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "user-key": zomatoAPIkey
+            },
+            url: zomatoCuisinesQueryURL,
+            method: "GET"
+        })
+
+            .then(function (searchResponse) {
+
+                console.log(searchResponse);
+                // console.log(searchFood);
+
+                for(let i = 0; i < 5; i++){
+                    console.log("Result #"+[i]+" :");
+                    console.log(searchResponse.restaurants[i].restaurant.name);
+                    console.log(searchResponse.restaurants[i].restaurant.location.address);
+                    console.log("Rating :"+searchResponse.restaurants[i].restaurant.user_rating.aggregate_rating);
+                    console.log("Cuisine type :" + searchResponse.restaurants[i].restaurant.cuisines);
+                    console.log("Hours :"+ searchResponse.restaurants[i].restaurant.timings);
+
+                };
+
+            });
+    };
+
+
+    //**********************************************************************************
+    // serch Zomato w/o zip
+    //*********************************************************************************
+
+    // function searchZomato(searchFood) {
     //     //**********************************************************************************
     //     //***USE LATLON & CUISINE
     //     // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
@@ -96,8 +141,8 @@ $(document).ready(function () {
     //     var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
     //     // cuisines = "25";
 
-    //     let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?lat="+ lat + "&lon=" + lon + "&cuisines=25&category=25";
-    //     let cuisineFromEdamam = 0;
+    //     let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?q=" + searchFood;
+
     //     $.ajax({
     //         headers: {
     //             "Accept": "application/json",
@@ -110,6 +155,7 @@ $(document).ready(function () {
     //         .then(function (searchResponse) {
 
     //             console.log(searchResponse);
+    //             console.log(searchFood);
 
     //         });
     // };
@@ -151,4 +197,3 @@ $(document).ready(function () {
 //             searchZomato();
 //     };
 
-   
