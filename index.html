@@ -23,7 +23,7 @@
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li>
+                <li class="uk-inline">
                     <button class="uk-button uk-button-default uk-margin-small-right" type="button"
                         uk-toggle="target: #modal-example">Team Name</button>
                     <div id="modal-example" uk-modal>
@@ -32,30 +32,20 @@
                             <img
                                 src="https://pbs.twimg.com/profile_images/378800000408529086/5108c0356be611a5509f3d869c2dbd3d_400x400.jpeg">
                 </li>
-                <li class="uk-active uk-inline">
+                <li class="uk-inline">
                     <button class="uk-button uk-button-default" type="button">About Us</button>
                     <div uk-dropdown>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
                         and Michelle. This is our first project. I hope you like it. </div>
                 </li>
                 <li class="uk-inline">
-                    <!-- <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Can't Decide?</a>
-                    <div id="modal-center" class="uk-flex-top" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <p>Let us help you with that by flipping a coin <span uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Coin</button>
-                        </div>
-                    </div> -->
                     <div>
                         <button class="uk-button uk-button-default" type="button">Cant decide??</button>
                         <div uk-drop="pos: right-center">
                             <div class="uk-card uk-card-body uk-card-default">
-                                <p id="coinTossDisplay">Let us help you with that by flipping a coin <span
-                                        uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Coin</button>
+                                <p id="coinTossDisplay">Let us help you decide <span uk-icon="icon: happy"></span></p>
+                                <button id="coinToss" class="uk-button uk-button-primary">Random</button>
 
                             </div>
-
                         </div>
                     </div>
                 </li>
@@ -69,7 +59,6 @@
                 Welcome to Dine-in or Dine-out</h1>
         </Header>
 
-
         <dl class="uk-description-list uk-description-list-divider uk-overlay">
             <dt class="uk-text-primary uk-text-center ">Description</dt>
             <dd class="uk-text-center">A simple website that help you decide what to eat today. </dd>
@@ -80,11 +69,13 @@
             <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover"
                 data-src="https://www.thespruceeats.com/thmb/LV4VRAPdilCLCQj7mi4m8PFxczI=/2164x1386/filters:fill(auto,1)/freshvegetablesAlexRaths-4c1ea186a88e4fd7b95283eee614600c.jpg"
                 uk-img>
-                <form data-aos="fade-down" id="searchSection" onsubmit=" ">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon:search"></span>
-                        <input id="foodInput" class="uk-input uk-form-width-medium" type="text"
-                            placeholder="Search Food">
+                <div id="searchSection">
+                    <div data-aos="fade-left" class="uk-inline">
+                        <label>
+                            <span class="uk-form-icon" uk-icon="icon:search"></span>
+                            <input id="foodInput" class="uk-input uk-form-width-medium" type="text"
+                                placeholder="Search Food">
+                        </label>
                         <!-- <div class="uk-width-large" uk-dropdown>
                             <div class="uk-dropdown-grid uk-child-width-1-2@m" uk-grid>
                                 <div>
@@ -115,21 +106,24 @@
                                 </div>
                             </div> -->
                         <!-- </div> -->
-
-                        <div class="uk-inline">
-                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
-                            <input class="uk-input uk-form-width-medium" type="text" placeholder="zip code">
-                        </div>
-                        <input id="searchBtn" type="submit" class="uk-button uk-button-primary" value="Search" />
                     </div>
-                </form>
+                    <div data-aos="fade-right" class="uk-inline">
+                        <label>
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
+                            <input id="zipcodeInput" class="uk-input uk-form-width-medium" type="text"
+                                placeholder="zip code">
+                        </label>
+                    </div>
+                    <input id="searchBtn" type="submit" class="uk-button uk-button-primary" value="Search">
+                </div>
             </div>
 
             <hr class="uk-divider-icon">
+
             <div class="row">
                 <div class="uk-column-1-2 uk-column-1-2@ uk-column-1-2@m uk-column-divider">
 
-                    <div data-aos="fade-right">
+                    <div  id="recipesDispaly">
                         <h6>Recipes Display</h6>
                         <p> Name of recipes:</p>
 
@@ -153,7 +147,7 @@
                         </div>
                     </div>
 
-                    <div data-aos="fade-left">
+                    <div  id="restaurantDisplay">
                         <h6>Restaurant Display</h6>
                         <p>name of restaurents:</p>
                         <!-- This is a button toggling the modal with the outside close button -->
@@ -164,7 +158,7 @@
                         <div id="modal-close-outside" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
                                 <button class="uk-modal-close-outside" type="button" uk-close></button>
-                                <h2 class="uk-modal-title">Outside</h2>
+
                                 <h2 class="uk-modal-title">name of restaurents again</h2>
                                 <ol>
                                     <li> address</li>
@@ -188,31 +182,31 @@
 
 
 
-        <footer class="uk-padding-small uk-sticky='bottom: true'">
+        <!-- <footer class="uk-padding-small uk-sticky='bottom: true'">
             <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
-        </footer>
-        <!-- <script src="script.js"></script> -->
+        </footer> -->
+        <script src="script.js"></script> 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
         <script>
             // coin toss function 
-            function coinToss() {
-                var tossResult = Math.floor((Math.random() * 2) + 1)
-                if (tossResult === 1) {
-                    tossResultDisplay = $("<div>");
-                    tossResultDisplay.text("Head").addClass("uk-text-success uk-text-center");
-                    $("#coinTossDisplay").append(tossResultDisplay)
-                } else if (tossResult === 2) {
-                    tossResultDisplay = $("<div>");
-                    tossResultDisplay.text("Tail").addClass("uk-text-success uk-text-center");
-                    $("#coinTossDisplay").append(tossResultDisplay)
-                }
-                console.log(tossResult)
-            }
+            // function coinToss() {
+            //     var tossResult = Math.floor((Math.random() * 2) + 1)
+            //     if (tossResult === 1) {
+            //         tossResultDisplay = $("<div>");
+            //         tossResultDisplay.text("Head").addClass("uk-text-success uk-text-center");
+            //         $("#coinTossDisplay").append(tossResultDisplay)
+            //     } else if (tossResult === 2) {
+            //         tossResultDisplay = $("<div>");
+            //         tossResultDisplay.text("Tail").addClass("uk-text-success uk-text-center");
+            //         $("#coinTossDisplay").append(tossResultDisplay)
+            //     }
+            //     console.log(tossResult)
+            // }
             function coinTossOption() {
-                var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cook sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
+                var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cooking sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
                 var randomNum = Math.floor((Math.random() * (coinTossOptions.length)))
                 outcomeDisplay = $("<div>").text(coinTossOptions[randomNum]).addClass("uk-text-warning");
                 $("#coinTossDisplay").append(outcomeDisplay);
@@ -220,7 +214,7 @@
             }
             $("#coinToss").on("click", function () {
                 $("#coinTossDisplay").empty()
-                coinToss();
+                // coinToss();
                 coinTossOption()
             })
         </script>
