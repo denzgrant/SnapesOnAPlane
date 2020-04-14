@@ -51,15 +51,16 @@ $(document).ready(function () {
             var dropDownRecipesDisplayimageLi = $("<li>")
             var dropDownRecipesDisplayimage = $("<img>").attr("src", recipesResult.image).attr("alt", recipesResult.label);
             dropDownRecipesDisplayimageLi.append(dropDownRecipesDisplayimage);
-
-            recipesUl.append(dropDownRecipesDisplayLinkLi, dropDownRecipesDisplayDietLabelsLi,dropDownRecipesDisplayHealthLabelLi, dropDownRecipesDisplayimageLi )
-           
-            var dropDownDiv = $("<div>").addClass("uk-card")
-
-            dropDownDiv.append(dropDownRecipesNameDisplay, recipesUl)
             
-           $("#recipesDispaly").append(dropDownDiv )
+            recipesUl.append(dropDownRecipesDisplayLinkLi, dropDownRecipesDisplayDietLabelsLi,dropDownRecipesDisplayHealthLabelLi, dropDownRecipesDisplayimageLi )
 
+            var dropdownButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button")
+            var dropDownDiv = $("<div>").attr("uk-dropdown", "")
+
+            dropDownDiv.append(recipesUl);
+
+            $("#recipesDispaly").append(dropDownRecipesNameDisplay,dropdownButton, dropDownDiv )
+        }
             
         }
             
