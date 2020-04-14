@@ -1,7 +1,7 @@
 # Team Name SnapesOnAPlane
 - U of A Coding bootcamp Project 1 :metal:
-*https://denzgrant.github.io/SnapesOnAPlane/*
-**Team Member: Denzell, Hoover, and Michelle.**
+- *https://denzgrant.github.io/SnapesOnAPlane/*
+- **Team Member: Denzell :see_no_evil:, Hoover :hear_no_evil:, and Michelle. :speak_no_evil:**
 
 ## User story
 
@@ -12,8 +12,8 @@
 
 ## Libaries used:
 ### CSS Frameworks:
-> UIKit
-> CSS
+> - UIKit
+> - CSS
 
 ### Server-side API used:
 1. Zomato-https://developers.zomato.com/api
