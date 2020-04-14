@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#searchBtn").on("click", function () {
 
         let searchFood = $("#foodInput").val();
-        let zip = $("#zipCode")[0].value;
+        let zip = $("#zipcodeInput")[0].value;
 
         // searchSpoonacular(searchFood);
                
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 let latitiude = response.coord.lat;
                 let cityName = response.name;  
                 
-                callback(longitude, latitiude);
+                callback(latitiude,longitude);
 
             });
 
@@ -97,22 +97,39 @@ $(document).ready(function () {
         //*********************************************************************************
 
         var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
-        let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?q="+
-        searchFood+"&lat="+
-        lon+"&lon="+lat;
-
+        // let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?lat=33.34&lon=-111.74";
+        let zomatoFindCityID = "https://developers.zomato.com/api/v2.1/cities?lat="+lat+"&lon="+lon;
         $.ajax({
             headers: {
                 "Accept": "application/json",
                 "user-key": zomatoAPIkey
             },
-            url: zomatoCuisinesQueryURL,
+            url: zomatoFindCityID,
             method: "GET"
         })
 
-            .then(function (searchResponse) {
+            .then(function (searchResponse) {              
 
+                let cityID = searchResponse.location_suggestions[0].id;
                 console.log(searchResponse);
+                // now take city ID and make call to collections
+                let zomatoCollections = "https://developers.zomato.com/api/v2.1/cities?lat="+lat+"&lon="+lon;
+                $.ajax({
+                    headers: {
+                        "Accept": "application/json",
+                        "user-key": zomatoAPIkey
+                    },
+                    url: zomatoCollections,
+                    method: "GET"
+                })
+    
+                    .then(function (searchResponse) {
+    
+                        // console.log(searchResponse);
+                    
+    
+                    });
+                
                 // console.log(searchFood);
 
                 // for(let i = 0; i < 5; i++){
@@ -132,6 +149,8 @@ $(document).ready(function () {
     
 
 });
+
+
 
 
 //**********************************************************************************

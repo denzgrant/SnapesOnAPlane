@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./styles.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 
     <title>Dine-In or Dine-Out</title>
 </head>
@@ -21,7 +23,7 @@
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li>
+                <li class="uk-inline">
                     <button class="uk-button uk-button-default uk-margin-small-right" type="button"
                         uk-toggle="target: #modal-example">Team Name</button>
                     <div id="modal-example" uk-modal>
@@ -30,28 +32,20 @@
                             <img
                                 src="https://pbs.twimg.com/profile_images/378800000408529086/5108c0356be611a5509f3d869c2dbd3d_400x400.jpeg">
                 </li>
-                <li class="uk-active uk-inline">
+                <li class="uk-inline">
                     <button class="uk-button uk-button-default" type="button">About Us</button>
                     <div uk-dropdown>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
                         and Michelle. This is our first project. I hope you like it. </div>
                 </li>
                 <li class="uk-inline">
-                    <!-- <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Can't Decide?</a>
-                    <div id="modal-center" class="uk-flex-top" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <p>Let us help you with that by flipping a coin <span uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Coin</button>
-                        </div>
-                    </div> -->
                     <div>
                         <button class="uk-button uk-button-default" type="button">Cant decide??</button>
                         <div uk-drop="pos: right-center">
                             <div class="uk-card uk-card-body uk-card-default">
-                                <p>Let us help you with that by flipping a coin <span uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Coin</button>
-                            </div>
+                                <p id="coinTossDisplay">Let us help you decide <span uk-icon="icon: happy"></span></p>
+                                <button id="coinToss" class="uk-button uk-button-primary">Random</button>
 
+                            </div>
                         </div>
                     </div>
                 </li>
@@ -60,79 +54,169 @@
 
     </nav>
     <div class="uk-container">
-        <header>
-            <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-animation-scale-up uk-margin-small-top">
-                Welcome to Dine-in or
-                Dine-out</h1>
-        </header>
+        <Header data-aos="zoom-in">
+            <h1 class="uk-heading-medium uk-text-center uk-text-primary uk-margin-small-top">
+                Welcome to Dine-in or Dine-out</h1>
+        </Header>
 
-        <dl class="uk-description-list uk-description-list-divider uk-animation-fade uk-overlay">
+        <dl class="uk-description-list uk-description-list-divider uk-overlay">
             <dt class="uk-text-primary uk-text-center ">Description</dt>
-            <dd>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit error fugiat, architecto ex hic quos
-                magni recusandae reiciendis ad placeat quis laboriosam! Illum provident exercitationem accusantium cum
-                sed, rerum quisquam.</dd>
+            <dd class="uk-text-center">A simple website that help you decide what to eat today. </dd>
         </dl>
         <hr class="uk-divider-icon">
+
         <div>
-            <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+            <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover"
                 data-src="https://www.thespruceeats.com/thmb/LV4VRAPdilCLCQj7mi4m8PFxczI=/2164x1386/filters:fill(auto,1)/freshvegetablesAlexRaths-4c1ea186a88e4fd7b95283eee614600c.jpg"
                 uk-img>
+                <div id="searchSection">
+                    <div data-aos="fade-left" class="uk-inline">
+                        <label>
+                            <span class="uk-form-icon" uk-icon="icon:search"></span>
+                            <input id="foodInput" class="uk-input uk-form-width-medium" type="text"
+                                placeholder="Search Food">
+                        </label>
+                        <!-- <div class="uk-width-large" uk-dropdown>
+                            <div class="uk-dropdown-grid uk-child-width-1-2@m" uk-grid>
+                                <div>
+                                    <ul class="uk-nav uk-dropdown-nav uk-text-left">
+                                        <li class="uk-active"><a href="#">Diet Labels</a></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Balanced</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">High-Fiber</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">High-Protein</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Low-Carb</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Low-Fat</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Low-Sodium</label></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="uk-nav uk-dropdown-nav uk-text-left">
+                                        <li class="uk-active"><a href="#">Health Labels</a></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Alcohol-Free</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Dairy-Free</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Gluten-Free</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Peanut-Free</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Shellfish-Free</label>
+                                        </li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Tree-Nut-Free</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Vegetarian</label></li>
+                                        <li><label><input class="uk-checkbox" type="checkbox">Wheat-Free</label></li>
+
+                                    </ul>
+                                </div>
+                            </div> -->
+                        <!-- </div> -->
+                    </div>
+                    <div data-aos="fade-right" class="uk-inline">
+                        <label>
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
+                            <input id="zipcodeInput" class="uk-input uk-form-width-medium" type="text"
+                                placeholder="zip code">
+                        </label>
+                    </div>
+                    <input id="searchBtn" type="submit" class="uk-button uk-button-primary" value="Search">
+                </div>
             </div>
 
             <hr class="uk-divider-icon">
 
+            <div class="row">
+                <div class="uk-column-1-2 uk-column-1-2@ uk-column-1-2@m uk-column-divider">
 
-            <div
-                class="uk-margin uk-text-center uk-animation-shake uk-margin-small-bottom uk-position-center uk-postiion-justify">
-                <div class="uk-inline">
-                    <span class="uk-form-icon" uk-icon="icon:search"></span>
-                    <input id="foodInput" class="uk-input uk-form-width-medium" type="text" placeholder="Search Food">
-                    <div class="uk-width-large" uk-dropdown>
-                        <div class="uk-dropdown-grid uk-child-width-1-2@m" uk-grid>
-                            <div>
-                                <ul class="uk-nav uk-dropdown-nav uk-text-left">
-                                    <li class="uk-active"><a href="#">Diet Labels</a></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Balanced</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">High-Fiber</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">High-Protein</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Low-Carb</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Low-Fat</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Low-Sodium</label></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="uk-nav uk-dropdown-nav uk-text-left">
-                                    <li class="uk-active"><a href="#">Health Labels</a></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Alcohol-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Dairy-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Gluten-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Peanut-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Shellfish-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Tree-Nut-Free</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Vegetarian</label></li>
-                                    <li><label><input class="uk-checkbox" type="checkbox">Wheat-Free</label></li>
+                    <div  id="recipesDispaly">
+                        <h6>Recipes Display</h6>
+                        <p> Name of recipes:</p>
 
+                        <button class="uk-button uk-button-default uk-margin-small-right" type="button"
+                            uk-toggle="target: #modal-close-default">check out details</button>
+
+                        <!-- This is the modal with the default close button -->
+                        <div id="modal-close-default" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body">
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+                                <h2 class="uk-modal-title">recipes name agin</h2>
+                                <ul>
+                                    <li><img src="https://www.seriouseats.com/recipes/images/2015/07/20150702-sous-vide-hamburger-anova-primary-1500x1125.jpg"
+                                            style="width: 300px; height: 300px;"></li>
+                                    <li><a href="#">actual link to the recipes</a></li>
+                                    <li>
+                                        <p>Health and diet label:</p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="uk-inline">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
-                        <input class="uk-input uk-form-width-medium" type="text" placeholder="zip code" id ="zipCode">
-                    </div>
-                    <button id="searchBtn" class="uk-button uk-button-primary">Search </button>
-                </div>
-            </div>
+                    <div  id="restaurantDisplay">
+                        <h6>Restaurant Display</h6>
+                        <p>name of restaurents:</p>
+                        <!-- This is a button toggling the modal with the outside close button -->
+                        <button class="uk-button uk-button-default uk-margin-small-right" type="button"
+                            uk-toggle="target: #modal-close-outside">Check out Details for </button>
 
+                        <!-- This is the modal with the outside close button -->
+                        <div id="modal-close-outside" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body">
+                                <button class="uk-modal-close-outside" type="button" uk-close></button>
+
+                                <h2 class="uk-modal-title">name of restaurents again</h2>
+                                <ol>
+                                    <li> address</li>
+                                    <li><a href="#">actual link to restaurent</a></li>
+                                    <li><img src="https://www.cornerstonepref.com/cornesg5_wordpress/wp-content/uploads/2016/05/restaurant-insurance.jpg"
+                                            style="width: 300px; height: 300px;"></li>
+                                </ol>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
 
-        <footer class="uk-padding-small uk-sticky">
+        <!-- <footer class="uk-padding-small uk-sticky='bottom: true'">
             <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
-        </footer>
+        </footer> -->
+        <script src="script.js"></script> 
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script>
+            // coin toss function 
+            // function coinToss() {
+            //     var tossResult = Math.floor((Math.random() * 2) + 1)
+            //     if (tossResult === 1) {
+            //         tossResultDisplay = $("<div>");
+            //         tossResultDisplay.text("Head").addClass("uk-text-success uk-text-center");
+            //         $("#coinTossDisplay").append(tossResultDisplay)
+            //     } else if (tossResult === 2) {
+            //         tossResultDisplay = $("<div>");
+            //         tossResultDisplay.text("Tail").addClass("uk-text-success uk-text-center");
+            //         $("#coinTossDisplay").append(tossResultDisplay)
+            //     }
+            //     console.log(tossResult)
+            // }
+            function coinTossOption() {
+                var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cooking sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
+                var randomNum = Math.floor((Math.random() * (coinTossOptions.length)))
+                outcomeDisplay = $("<div>").text(coinTossOptions[randomNum]).addClass("uk-text-warning");
+                $("#coinTossDisplay").append(outcomeDisplay);
+
+            }
+            $("#coinToss").on("click", function () {
+                $("#coinTossDisplay").empty()
+                // coinToss();
+                coinTossOption()
+            })
+        </script>
 </body>
 
 </html>
