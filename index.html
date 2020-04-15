@@ -20,6 +20,23 @@
 </head>
 
 <body>
+    <div id="recipes-modal" uk-modal>
+        <div class="uk-modal-dialog">
+            <!-- <button class="uk-modal-close-default" type="button" uk-close></button> -->
+            <div class="uk-modal-header">
+                <h2 id="recipesModalTitle"class="uk-modal-title">Modal Title</h2>
+            </div>
+            <div class="uk-modal-body">
+               <ul>
+                   <li><a id="recipeModalLink">check out recipe:</a></li>
+                   <li id="recipeModalDiet"></li>
+                   <li id="recipeModalHealth"></li>
+                   <li><img id="recipeModalImage"></li>
+               </ul>
+            </div>
+
+        </div>
+    </div>
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
@@ -69,14 +86,13 @@
 
         <dl data-aos="fade-down" class="uk-description-list uk-description-list-divider uk-overlay">
             <dt class="uk-text-primary uk-text-center "></dt>
-            <dd class="uk-text-center">Making decision for what to eat is always hard. This is a simple website that help
+            <dd class="uk-text-center">Making decision for what to eat is always hard. This is a simple website that
+                help
                 you decide what to eat today.
-                <div id="time" data-aos="flip-left"
-                data-aos-easing="ease-out-cubic"
-                data-aos-duration="2000">
-           </div>
-                </dd>
-    
+                <div id="time" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+                </div>
+            </dd>
+
         </dl>
         <hr class="uk-divider-icon">
 
@@ -106,16 +122,17 @@
             <hr class="uk-divider-icon">
 
             <div class="row">
-                <div class="uk-column-1-2 uk-column-1-2@ uk-column-1-2@m uk-column-divider">
+                <div class="uk-child-width-expand@s uk-grid-divider " uk-grid>
 
-                    <div  id="recipesDispaly">
-                        <h6>Recipes Display</h6>
-                   
+                    <div id="recipesDispaly" >
+                       
+                        
+
                     </div>
-
-                    <div  id="restaurantDisplay">
+                  
+                    <div id="restaurantDisplay" >
                         <h6>Restaurant Display</h6>
-                     
+
                     </div>
 
                 </div>
@@ -137,7 +154,7 @@
         <script>
             AOS.init();
         </script>
-       
+
 </body>
 
 </html>
