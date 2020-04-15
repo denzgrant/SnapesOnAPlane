@@ -18,7 +18,7 @@
 ### Server-side API used:
 1. Zomato-https://developers.zomato.com/api
 2. Edamam-https://developer.edamam.com/
-
+3. Open Weather Map-https://openweathermap.org/
 
 ### Third-Party API used:
 1. Jquery
