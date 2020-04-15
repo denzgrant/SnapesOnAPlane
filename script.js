@@ -153,4 +153,5 @@ $(document).ready(function () {
         //     console.log(zipcodeResponse[0].zipcodes[0].longitude);
 
         // });
-    });
+    })
+});
