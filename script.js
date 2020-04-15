@@ -111,24 +111,27 @@ $(document).ready(function () {
             .then(function (searchResponse) {              
 
                 let cityID = searchResponse.location_suggestions[0].id;
+                console.log("help");
                 console.log(searchResponse);
+                
                 // now take city ID and make call to collections
-                let zomatoCollections = "https://developers.zomato.com/api/v2.1/cities?lat="+lat+"&lon="+lon;
-                $.ajax({
-                    headers: {
-                        "Accept": "application/json",
-                        "user-key": zomatoAPIkey
-                    },
-                    url: zomatoCollections,
-                    method: "GET"
-                })
+                // let zomatoCollections = "https://developers.zomato.com/api/v2.1/cities?lat="+lat+"&lon="+lon;
+                // $.ajax({
+                //     headers: {
+                //         "Accept": "application/json",
+                //         "user-key": zomatoAPIkey
+                //     },
+                //     url: zomatoCollections,
+                //     method: "GET"
+                // })
     
-                    .then(function (searchResponse) {
+                //     .then(function (searchResponse) {
     
-                        // console.log(searchResponse);
+                //         // console.log(searchResponse);
+                        
                     
     
-                    });
+                //     });
                 
                 // console.log(searchFood);
 
