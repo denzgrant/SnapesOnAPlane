@@ -68,9 +68,15 @@
         </Header>
 
         <dl data-aos="fade-down" class="uk-description-list uk-description-list-divider uk-overlay">
-            <dt class="uk-text-primary uk-text-center ">Description</dt>
+            <dt class="uk-text-primary uk-text-center "></dt>
             <dd class="uk-text-center">Making decision for what to eat is always hard. This is simple website that help
-                you decide what to eat today.</dd>
+                you decide what to eat today.
+                <div id="time" data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000">
+           </div>
+                </dd>
+    
         </dl>
         <hr class="uk-divider-icon">
 
@@ -109,28 +115,7 @@
 
                     <div  id="restaurantDisplay">
                         <h6>Restaurant Display</h6>
-                        <p>name of restaurents:</p>
-                        <!-- This is a button toggling the modal with the outside close button -->
-                        <button class="uk-button uk-button-default uk-margin-small-right" type="button"
-                            uk-toggle="target: #modal-close-outside">Check out Details for </button>
-
-                        <!-- This is the modal with the outside close button -->
-                        <div id="modal-close-outside" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body">
-                                <button class="uk-modal-close-outside" type="button" uk-close></button>
-
-                                <h2 class="uk-modal-title">name of restaurents again</h2>
-                                <ol>
-                                    <li> address</li>
-                                    <li><a href="#">actual link to restaurent</a></li>
-                                    <li><img src="https://www.cornerstonepref.com/cornesg5_wordpress/wp-content/uploads/2016/05/restaurant-insurance.jpg"
-                                            style="width: 300px; height: 300px;"></li>
-                                </ol>
-
-                            </div>
-                        </div>
-
-
+                     
                     </div>
 
                 </div>
@@ -146,8 +131,8 @@
             <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
         </footer>
         <!-- <script src="script.js"></script>  -->
-        <script src="recipe.js"></script>
-        <script src="script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="main.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();

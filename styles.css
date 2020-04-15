@@ -1,0 +1,9 @@
+ul{
+    list-style-type: none;
+}
+h3{
+    color: lightcoral;
+}
+input[type="text"]:hover{
+    cursor: pointer;
+}
