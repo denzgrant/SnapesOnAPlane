@@ -81,7 +81,7 @@ $(document).ready(function () {
         }
 
     }
-    function getLatLon(zipCode) {
+    function getLatLon() {
         let openWeatherapiKey = "&appid=b52ce1773e76080cb950272fcf749391";
         let zipCode = $("#zipcodeInput").val();
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?zip="
