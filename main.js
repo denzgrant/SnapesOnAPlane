@@ -1,3 +1,37 @@
+const time = moment().format('MMM Do YYYY, h:mm a');
+const currentHour = moment().format('H');
+console.log(time);
+console.log(currentHour);
+//Current time
+//Im ok with changing font color
+timeAndDate = `<p style="color:blue; padding-top:1em;">It is currently ${time} </p>`
+$("#time").append(timeAndDate);
+
+switch (true) {
+
+    case (currentHour > "3" && currentHour < "6"):
+        $("#time").append("Prebreakfast is underrated");
+        break;
+    case (currentHour >= "6" && currentHour <= "9"):
+        $("#time").append("Time to break the fast. My friends from the Shire is inquring about second breakfast");
+        break;
+    case (currentHour > "9" && currentHour < "11"):
+        $("#time").append("Break out the mimosas, I'm ready for brunch");
+        break;
+    case (currentHour >= "11" && currentHour <= "13"):
+        $("#time").append("It's finally here, time for lunch!");
+        break;
+        case (currentHour > "13" && currentHour < "18"):
+        $("#time").append("Snackin' is more than a hobby, it's a lifetyle");
+        break;
+    case (currentHour >= "18" && currentHour < "22"):
+        $("#time").append("Afternoon snacks are a requirement");
+        break;
+    case (currentHour >= "22" && currentHour < "24"):
+        $("#time").append("Time for a late night snack!");
+        break;
+};
+
 $(document).ready(function () {
 
     $("#searchBtn").on("click", function () {
