@@ -1,159 +1,116 @@
+const time = moment().format('MMM Do YYYY, h:mm a');
+const currentHour = moment().format('H');
+console.log(time);
+console.log(currentHour);
+//Current time
+//Im ok with changing font color
+timeAndDate = `<p style="color:blue; padding-top:1em;">It is currently ${time} </p>`
+$("#time").append(timeAndDate);
+
+switch (true) {
+
+    case (currentHour > "3" && currentHour < "6"):
+        $("#time").append("Prebreakfast is underrated");
+        break;
+    case (currentHour >= "6" && currentHour <= "9"):
+        $("#time").append("Time to break the fast. My friends from the Shire is inquring about second breakfast");
+        break;
+    case (currentHour > "9" && currentHour < "11"):
+        $("#time").append("Break out the mimosas, I'm ready for brunch");
+        break;
+    case (currentHour >= "11" && currentHour <= "13"):
+        $("#time").append("It's finally here, time for lunch!");
+        break;
+        case (currentHour > "13" && currentHour < "18"):
+        $("#time").append("Snackin' is more than a hobby, it's a lifetyle");
+        break;
+    case (currentHour >= "18" && currentHour < "22"):
+        $("#time").append("Afternoon snacks are a requirement");
+        break;
+    case (currentHour >= "22" && currentHour < "24"):
+        $("#time").append("Time for a late night snack!");
+        break;
+}
+
 $(document).ready(function () {
 
-  // // **General ZOMATO info
-  // // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
-  // // Uncomment each API ajax call as needed
-  // var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
+    // function spoonacularCall(){
+    //     var searchFood =$("#foodInput").val();
+    //  $.ajax({
+    //             url: "https://api.spoonacular.com/recipes/search?&query="+ searchFood +"&number=5&apiKey=8de77782b79a4782b83241f64a78a1d0",
+    //             // url: "https://api.spoonacular.com/recipes/search?query=yogurt&apiKey=8de77782b79a4782b83241f64a78a1d0",
+    //             // "https://api.spoonacular.com/recipes/search?query=cheese&number=2",
 
-  // // #1***Categories API - my first test
-  // // -notice the 'headers object with the accept and user key info
+    //             method: "GET",
+    //         }).then(function (response) {
+    //             console.log(response)
+    //         });
 
-  // let zomatoCategoriesQueryURL = "https://developers.zomato.com/api/v2.1/categories";
+    // }
+    $("#searchBtn").on("click", function () {
+        // spoonacularCall();
+        recipesCall()
+    })
+    function recipesCall() {
+        $("#recipesDispaly").empty();
+        const apiKey = "&app_key=b625542fdcf8fe77f73a1d01bbcbe005";
+        const appId = "&app_id=6ed8e227";
+        const queryURLsearch = "https://api.edamam.com/search?q="
+        var searchFood = $("#foodInput").val();
+        $.ajax({
+            url: queryURLsearch + searchFood + appId + apiKey,
+            method: "GET"
+        }).then(function (response) {
 
+            console.log(response)
+            // console.log(response.hits[0].recipe);
+            // console.log(response.hits[0].recipe.label);
+            // console.log(response.hits[0].recipe.shareAs);
+            // console.log(response.hits[0].recipe.image);
+            // console.log(response.hits[0].recipe.dietLabels)
+            // console.log(response.hits[0].recipe.healthLabels)
+            for (var i = 0; i < response.hits.length; i++) {
+                var recipesResult = response.hits[i].recipe
 
-  //**********************************************************************************
-  // Edamam Search - Michelle
-  // //*********************************************************************************
-  // $(document).ready(function () {
+                var dropDownRecipesNameDisplay = $("<h2>").text(recipesResult.label)
 
-  //     const apiKey = "e549d6e9b38545a3a604db06b9006011";
-  //     const queryURLsearch = " https://api.spoonacular.com/recipes/search?query=cheese&apiKey=" + apiKey; 
+                var recipesUl = $("<ul>")
+                var dropDownRecipesDisplayLinkLi = $("<li>");
+                var drowDownRecipesDisplayLink = $("<a>").attr("href", recipesResult.shareAs).text("check out recipe")
+                dropDownRecipesDisplayLinkLi.append(drowDownRecipesDisplayLink)
 
-  //     $("#searchBtn").on("click", function () {
-  //         // var searchFood = $("#foodInput").val();
+                var dropDownRecipesDisplayDietLabelsLi = $("<li>").text("Diet Labels: " + recipesResult.dietLabels)
+                var dropDownRecipesDisplayHealthLabelLi = $("<li>").text("Health Labels: " + recipesResult.healthLabels)
 
-  //         $.ajax({
-  //             url: queryURLsearch,
-  //             method: "GET"
-  //         }).then(function (response) {
-  //             console.log(response)
-  //             // console.log(response.hits[0].recipe);
-  //             // console.log(response.hits[0].recipe.dietLabels)
-  //             // console.log(response.hits[0].recipe.healthLabels)
-  //         })
-          // function recipesCall(){
+                var dropDownRecipesDisplayimageLi = $("<li>")
+                var dropDownRecipesDisplayimage = $("<img>").attr("src", recipesResult.image).attr("alt", recipesResult.label);
+                dropDownRecipesDisplayimageLi.append(dropDownRecipesDisplayimage);
 
-          // }
+                recipesUl.append(dropDownRecipesDisplayLinkLi, dropDownRecipesDisplayDietLabelsLi, dropDownRecipesDisplayHealthLabelLi, dropDownRecipesDisplayimageLi)
 
-      })
+                var dropdownButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button")
+                var dropDownDiv = $("<div>").attr("uk-dropdown", "")
 
-      //     $.ajax({
-      //         url:queryURL,
-      //         method: "GET"
-      //     })
+                dropDownDiv.append(recipesUl);
 
-      // function searchEdamam(recipe){
+                $("#recipesDispaly").append(dropDownRecipesNameDisplay, dropdownButton, dropDownDiv)
+            }
 
-      //     //**********************************************************************************
-      //     //  Make Recipe seach call to Edamam,  locate cuisine lablel
-      //     //*********************************************************************************
-          
-      //     let edamamAppID = "d9d2f227";
-      //     let edamamAppKey = "d7ef7e1d47c86463be79d5b8cfe85ceb";
-      //     let userSubmittedRecipe = "chicken";
-          
-      //     let edamamRecipeQueryURL = "https://api.edamam.com/search?q="+userSubmittedRecipe+"&app_id="+edamamAppID+"&app_key="+edamamAppKey;
-  
-      //     $.ajax({
-  
-      //         url: edamamRecipeQueryURL,
-      //         method: "GET"
-      //     })
-  
-      //     .then(function (edamamResponse) {
-  
-      //         console.log(edamamResponse);
-      //         // return localcuisine;
-      //     });    
-      // };
-      
-  
-      // function searchOpenWeather(zipCode){
-  
-  
-      //     //**********************************************************************************
-      //     //Make Zip Code   -->  when user provides zip code
-      //     //*********************************************************************************   
-      //     // user openWetherApp - additional calls vs Smarty Streats?
-      //     // consider using Geolocation API in addition/alternative to this? 
-      //     var zomatoAPIkey = "a549ce24eb93dc5699075cf1ac33c10e";
-  
-  
-      
-      
-      //     // curl example api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={your api key}
-      //     let openWeatherapiKey = "b52ce1773e76080cb950272fcf749391";
-      //     // let zipCode = 85295;
-      //     let queryURL = "http://api.openweathermap.org/data/2.5/weather?zip="+zipCode+"&units=imperial&APPID="+openWeatherapiKey;
-      
-      
-      //     $.ajax({
-      //         url:queryURL,
-      //         method: "GET"
-      //     })
-  
-      //     .then(function (response){
-  
-      //         let longitude = response.coord.lon;
-      //         let latitiude = response.coord.lat;
-      //         let cityName = response.name;
-  
-      //         console.log("long :"+longitude+"lat :"+latitiude+"name :"+cityName);                  
-  
-      //     });
-      // };
-  
-      // function searchZomato(cuisine,latlon){
-      //     //**********************************************************************************
-      //         //***USE LATLON & CUISINE
-      //         // zomato API Key a549ce24eb93dc5699075cf1ac33c10e
-      //         //*********************************************************************************
-              
-      //     let zomatoCuisinesQueryURL = "https://developers.zomato.com/api/v2.1/search?lat="+latitiude+"&lon="+longitude+"&cuisines=25&category=25";
-      //     let cuisineFromEdamam = 0;
-      //     $.ajax({
-      //         headers: {
-      //             "Accept": "application/json",
-      //             "user-key": zomatoAPIkey
-      //         },
-      //         url: zomatoCuisinesQueryURL,
-      //         method: "GET"
-      //     })
-  
-      //         .then(function (searchResponse) {
-  
-      //             console.log(searchResponse);
-  
-      //         });
-      // };   
-  
+        });
 
 
 
+        function coinTossOption() {
+            var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cook sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
+            var randomNum = Math.floor((Math.random() * (coinTossOptions.length)))
+            outcomeDisplay = $("<div>").text(coinTossOptions[randomNum]).addClass("uk-text-warning");
+            $("#coinTossDisplay").append(outcomeDisplay);
 
-      //We would have to use SmartyStreets to get the long and lat and then /cuisines
-
-
-      //SmartyStreets API Key:  NUyt5AzQ2s8Uj3fsc3Gg5aUUpVvulOX8wiBzUBWrRPNt1zlUOMG7XVBe2U79dXkf
-      // SmartyStreets auth-id: 79c8e6ad-5580-f54d-a3fd-6b61e3afa1c0; 
-      // SmartyStreets auth-token: aeAOvpVM8CGwrrhDkHW7
-      //250 LOOK-UPS A MONTH: MAKE SURE TO COMMENT OUT IF YOURE TESTING OTHER ASPECTS OF THE CODE
-
-      // let ssZipCode = "85066";
-      // let smartyStreetsQueryURL = "https://us-zipcode.api.smartystreets.com/lookup?auth-id=79c8e6ad-5580-f54d-a3fd-6b61e3afa1c0&auth-token=aeAOvpVM8CGwrrhDkHW7&zipcode=" + ssZipCode;
-
-      // $.ajax({
-      //     url: smartyStreetsQueryURL,
-      //     method: "GET"
-
-      // }).then(function (zipcodeResponse) {
-
-      //     console.log(zipcodeResponse);
-      //     //latitude
-      //     console.log(zipcodeResponse[0].zipcodes[0].latitude);
-      //     //longitude
-      //     console.log(zipcodeResponse[0].zipcodes[0].longitude);
-
-      // });
-//   });
-// });
+        }
+        $("#coinToss").on("click", function () {
+            $("#coinTossDisplay").empty()
+            // coinToss();
+            coinTossOption()
+        })
+    }
+})
