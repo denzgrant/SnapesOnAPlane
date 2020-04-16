@@ -53,32 +53,22 @@ $(document).ready(function () {
         })
     }
     function recipesDisplay(response) {
-        for (var i = 0; i < response.hits.length; i++) {
-            var recipesResult = response.hits[i].recipe
+        response.hits.forEach(function (hit) {
+            var recipesResult = hit.recipe
+            var recipesNameDisplay = $("<h3>").text(recipesResult.label).attr("data-aos", "flip-left")
 
-            var dropDownRecipesNameDisplay = $("<h3>").text(recipesResult.label).attr("data-aos", "flip-left")
+            var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button").attr("uk-toggle", "target: #recipes-modal").click(function () {
+                    $("#recipesModalTitle").text(recipesResult.label)
+                    $("#recipeModalLink").attr("href", recipesResult.shareAs)
+                    $("#recipeModalDiet").text("Diet Labels: " + recipesResult.dietLabels)
+                    $("#recipeModalHealth").text("Health Labels: " + recipesResult.healthLabels);
+                    $("#recipeModalImage").attr("src", recipesResult.image).attr("alt", recipesResult.label);
+            })
 
-            var recipesUl = $("<ul>")
-            var dropDownRecipesDisplayLinkLi = $("<li>");
-            var drowDownRecipesDisplayLink = $("<a>").attr("href", recipesResult.shareAs).text("check out recipe")
-            dropDownRecipesDisplayLinkLi.append(drowDownRecipesDisplayLink)
+            $("#recipesDispaly").append(recipesNameDisplay, modalButton)
 
-            var dropDownRecipesDisplayDietLabelsLi = $("<li>").text("Diet Labels: " + recipesResult.dietLabels)
-            var dropDownRecipesDisplayHealthLabelLi = $("<li>").text("Health Labels: " + recipesResult.healthLabels)
+        })
 
-            var dropDownRecipesDisplayimageLi = $("<li>")
-            var dropDownRecipesDisplayimage = $("<img>").attr("src", recipesResult.image).attr("alt", recipesResult.label);
-            dropDownRecipesDisplayimageLi.append(dropDownRecipesDisplayimage);
-
-            recipesUl.append(dropDownRecipesDisplayLinkLi, dropDownRecipesDisplayDietLabelsLi, dropDownRecipesDisplayHealthLabelLi, dropDownRecipesDisplayimageLi)
-
-            var dropdownButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button")
-            var dropDownDiv = $("<div>").attr("uk-dropdown", "")
-
-            dropDownDiv.append(recipesUl);
-
-            $("#recipesDispaly").append(dropDownRecipesNameDisplay, dropdownButton, dropDownDiv)
-        }
 
     }
     function getLatLon() {
