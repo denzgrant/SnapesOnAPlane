@@ -35,15 +35,26 @@ switch (true) {
 $(document).ready(function () {
 
     $("#searchBtn").on("click", function () {
-        recipesCall();
-        getLatLon();
+        var searchFood = $("#foodInput").val();
+        var zipCode = $("#zipcodeInput").val();
+        if ( searchFood === "" || zipCode === ""){
+            UIkit.notification({message: `<p style="background-color: red;"><strong>Please Enter in search box</strong></p>`})
+            
+        } else{
+            recipesCall(searchFood);
+            getLatLon(zipCode); 
+        }
+       
+        
+       
+
     })
-    function recipesCall() {
+    function recipesCall(searchFood) {
         $("#recipesDispaly").empty();
         const apiKey = "&app_key=b625542fdcf8fe77f73a1d01bbcbe005";
         const appId = "&app_id=6ed8e227";
         const queryURLsearch = "https://api.edamam.com/search?q="
-        var searchFood = $("#foodInput").val();
+        
         $.ajax({
             url: queryURLsearch + searchFood + appId + apiKey + "&from=0&to=5",
             method: "GET"
@@ -72,9 +83,9 @@ $(document).ready(function () {
 
 
     }
-    function getLatLon() {
+    function getLatLon(zipCode) {
         let openWeatherapiKey = "&appid=b52ce1773e76080cb950272fcf749391";
-        let zipCode = $("#zipcodeInput").val();
+
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?zip="
         $.ajax({
             url: queryURL + zipCode + openWeatherapiKey,
