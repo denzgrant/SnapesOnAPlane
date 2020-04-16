@@ -45,7 +45,7 @@ $(document).ready(function () {
         const queryURLsearch = "https://api.edamam.com/search?q="
         var searchFood = $("#foodInput").val();
         $.ajax({
-            url: queryURLsearch + searchFood + appId + apiKey,
+            url: queryURLsearch + searchFood + appId + apiKey + "&from=0&to=5",
             method: "GET"
         }).then(function (response) {
             recipesDisplay(response)
@@ -53,34 +53,23 @@ $(document).ready(function () {
         })
     }
     function recipesDisplay(response) {
-        for (var i = 0; i < response.hits.length; i++) {
-           
-            var recipesResult = response.hits[i].recipe
-   
 
-            var dropDownRecipesNameDisplay = $("<h3>").text(recipesResult.label).attr("data-aos", "flip-left")
+        response.hits.forEach(function (hit) {
+            var recipesResult = hit.recipe
+            var recipesNameDisplay = $("<h3>").text(recipesResult.label).attr("data-aos", "flip-left")
 
-            var recipesUl = $("<ul>")
-            var dropDownRecipesDisplayLinkLi = $("<li>");
-            var drowDownRecipesDisplayLink = $("<a>").attr("href", recipesResult.shareAs).text("check out recipe")
-            dropDownRecipesDisplayLinkLi.append(drowDownRecipesDisplayLink)
+            var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button").attr("uk-toggle", "target: #recipes-modal").click(function () {
+                    $("#recipesModalTitle").text(recipesResult.label)
+                    $("#recipeModalLink").attr("href", recipesResult.shareAs)
+                    $("#recipeModalDiet").text("Diet Labels: " + recipesResult.dietLabels)
+                    $("#recipeModalHealth").text("Health Labels: " + recipesResult.healthLabels);
+                    $("#recipeModalImage").attr("src", recipesResult.image).attr("alt", recipesResult.label);
+            })
 
-            var dropDownRecipesDisplayDietLabelsLi = $("<li>").text("Diet Labels: " + recipesResult.dietLabels)
-            var dropDownRecipesDisplayHealthLabelLi = $("<li>").text("Health Labels: " + recipesResult.healthLabels)
+            $("#recipesDispaly").append(recipesNameDisplay, modalButton)
 
-            var dropDownRecipesDisplayimageLi = $("<li>")
-            var dropDownRecipesDisplayimage = $("<img>").attr("src", recipesResult.image).attr("alt", recipesResult.label);
-            dropDownRecipesDisplayimageLi.append(dropDownRecipesDisplayimage);
+        })
 
-            recipesUl.append(dropDownRecipesDisplayLinkLi, dropDownRecipesDisplayDietLabelsLi, dropDownRecipesDisplayHealthLabelLi, dropDownRecipesDisplayimageLi)
-
-            var dropdownButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button")
-            var dropDownDiv = $("<div>").attr("uk-dropdown", "")
-
-            dropDownDiv.append(recipesUl);
-
-            $("#recipesDispaly").append(dropDownRecipesNameDisplay, dropdownButton, dropDownDiv)
-        }
 
     }
     function getLatLon() {
