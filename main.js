@@ -45,7 +45,7 @@ $(document).ready(function () {
         const queryURLsearch = "https://api.edamam.com/search?q="
         var searchFood = $("#foodInput").val();
         $.ajax({
-            url: queryURLsearch + searchFood + appId + apiKey,
+            url: queryURLsearch + searchFood + appId + apiKey + "&from=0&to=5",
             method: "GET"
         }).then(function (response) {
             recipesDisplay(response)
@@ -53,6 +53,7 @@ $(document).ready(function () {
         })
     }
     function recipesDisplay(response) {
+
         response.hits.forEach(function (hit) {
             var recipesResult = hit.recipe
             var recipesNameDisplay = $("<h3>").text(recipesResult.label).attr("data-aos", "flip-left")
