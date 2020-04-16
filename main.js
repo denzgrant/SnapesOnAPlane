@@ -96,7 +96,7 @@ $(document).ready(function () {
                 let latitiude = response.coord.lat;
                 let cityName = response.name;
                 console.log("long :" + longitude + " lat :" + latitiude + " name: " + cityName);
-                zomatoRestaurantCall(latitiude, longitude)
+                zomatoRestaurantCall(latitiude, longitude);
 
             });
     };
@@ -150,23 +150,8 @@ $(document).ready(function () {
                 $("#restaurantDisplay").append(dropDownRestaurantNameDisplay, dropdownButton, dropDownDiv);
                 
                 };
-
                 
-                // console.log("location :"+searchResponse.restaurants[0].restaurant.location.address);
-                // console.log("rating :" + searchResponse.restaurants[0].restaurant.user_rating.rating_text);
-                // for (var i = 0; i < 5; i++){
-                   
-                // };
 
-
-
-                // console.log(searchResponse);
-                // console.log(searchResponse.restaurants)
-                // console.log(searchResponse.restaurants[0])
-                // console.log(searchResponse.restaurants[0].restaurant.name)
-                // console.log(searchResponse.restaurants[0].restaurant.url)
-                // console.log(searchResponse.restaurants[0].restaurant.location.address)
-                // console.log(searchResponse.restaurants[0].restaurant.highlights)
             });
     }
     function coinTossOption() {
