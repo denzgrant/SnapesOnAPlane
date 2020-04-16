@@ -38,7 +38,7 @@ $(document).ready(function () {
         var searchFood = $("#foodInput").val();
         var zipCode = $("#zipcodeInput").val();
         if ( searchFood === "" || zipCode === ""){
-            UIkit.notification({message: `<p style="background-color: red;"><strong>Please Enter in search box</strong></p>`})
+            UIkit.notification({message: `<strong>Please Enter in search box</strong>`})
             
         } else{
             recipesCall(searchFood);
