@@ -49,6 +49,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             recipesDisplay(response)
+            // console.log(response);
 
         })
     }
@@ -99,7 +100,7 @@ $(document).ready(function () {
         // const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?q="
         const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?"
         var searchFood = $("#foodInput").val();
-        const zomatoSearchCount = "count=10"
+        const zomatoSearchCount = "count=5"
         const zomatoLat = "&lat=" + latitiude
         const zomatoLon = "&lon=" + longitude
         $.ajax({
@@ -113,35 +114,30 @@ $(document).ready(function () {
         })
 
             .then(function (searchResponse) {
-                for (var i = 0; i < 5; i++){
+                restaurantDisplapy(searchResponse);
 
-                var dropDownRestaurantNameDisplay = $("<h3>").text(searchResponse.restaurants[i].restaurant.name).attr("data-aos", "flip-right")
                
-                var restaurantUl = $("<ul>");
-                var dropDownRestaurantDisplayLinkLi = $("<li>");
-                var drowDownRestaurantDisplayLink = $("<a>").attr("href", searchResponse.restaurants[i].restaurant.url).text("check the full details");
-                dropDownRestaurantDisplayLinkLi.append(drowDownRestaurantDisplayLink);
-
-                var dropDownRestaurantDisplayLocationLabelsLi = $("<li>").text("Location: " + searchResponse.restaurants[i].restaurant.location.address);
-                var dropDownRestaurantDisplayRatingLabelLi = $("<li>").text("User Rating: " + searchResponse.restaurants[i].restaurant.user_rating.rating_text);
-
-                var dropDownRestaurantDisplayimageLi = $("<li>")
-                var dropDownRestaurantDisplayimage = $("<img>").attr("src", searchResponse.restaurants[i].restaurant.photos[i].photo.thumb_url).attr("alt", searchResponse.restaurants[0].restaurant.name);
-                dropDownRestaurantDisplayimageLi.append(dropDownRestaurantDisplayimage);
-
-                restaurantUl.append(drowDownRestaurantDisplayLink, dropDownRestaurantDisplayLocationLabelsLi, dropDownRestaurantDisplayRatingLabelLi, dropDownRestaurantDisplayimageLi);
-
-                var dropdownButton = $("<button>").text("Check here for Restaurant Details").addClass("uk-button uk-button-primary").attr("type", "button");
-                var dropDownDiv = $("<div>").attr("uk-dropdown", "");
-
-                dropDownDiv.append(restaurantUl);
-
-                $("#restaurantDisplay").append(dropDownRestaurantNameDisplay, dropdownButton, dropDownDiv);
-                
-                };
-                
-
             });
+
+            function restaurantDisplapy(responseZtom){
+                responseZtom.restaurants.forEach(function (hit) {
+                    var restaurantResult = hit.restaurant;
+                    // console.log(restaurantResult);
+                    
+                    var restaurantNameDisplay = $("<h3>").text(restaurantResult.name).attr("data-aos", "flip-left")
+                    // var dropDownRestaurantNameDisplay = $("<h3>").text(searchResponse.restaurants[i].restaurant.name).attr("data-aos", "flip-right")
+                    var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button").attr("uk-toggle", "target: #restaurant-modal").click(function () {
+                            $("#restaurantModalTitle").text(restaurantResult.name)
+                            $("#restaurantModalLink").attr("href", restaurantResult.url)
+                            $("#restaurantModalLocation").text("Location: " + restaurantResult.location.address)
+                            $("#restaurantModalRatingModalRating").text("User rating : " + restaurantResult.user_rating.rating_text);
+                            $("#restaurantModalImage").attr("src", restaurantResult.photos[0].photo.thumb_url).attr("alt", "picture of local food");
+                    })
+        
+                    $("#restaurantDisplay").append(restaurantNameDisplay, modalButton)
+                })  
+
+            };
     }
     function coinTossOption() {
         var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cook sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
