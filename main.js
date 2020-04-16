@@ -35,8 +35,8 @@ switch (true) {
 $(document).ready(function () {
 
     $("#searchBtn").on("click", function () {
-        var searchFood = $("#foodInput").val();
-        var zipCode = $("#zipcodeInput").val();
+        var searchFood = $("#foodInput").val().trim().toLowerCase();
+        var zipCode = $("#zipcodeInput").val().trim().toLowerCase();
         if ( searchFood === "" || zipCode === ""){
             UIkit.notification({message: `<p style="background-color: red;"><strong>Please Enter in search box</strong></p>`})
             
@@ -106,8 +106,8 @@ $(document).ready(function () {
 
         const zomatoApiKey = "8ed1b92667f3ee82f4a77b02be24cf26";
         const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?q="
-        var searchFood = $("#foodInput").val();
-        const zomatoSearchCount = "&count=10"
+        var searchFood = $("#foodInput").val().trim().toLowerCase();
+        const zomatoSearchCount = "&count=5"
         const zomatoLat = "&lat=" + latitiude
         const zomatoLon = "&lon=" + longitude
         $.ajax({
@@ -132,7 +132,7 @@ $(document).ready(function () {
             });
     }
     function coinTossOption() {
-        var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cook sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
+        var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cooking sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
         var randomNum = Math.floor((Math.random() * (coinTossOptions.length)))
         outcomeDisplay = $("<div>").text(coinTossOptions[randomNum]).addClass("uk-text-warning");
         $("#coinTossDisplay").append(outcomeDisplay);
