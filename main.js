@@ -1,7 +1,7 @@
 const time = moment().format('MMM Do YYYY, h:mm a');
 const currentHour = moment().format('H');
-console.log(time);
-console.log(currentHour);
+// console.log(time);
+// console.log(currentHour);
 //Current time
 //Im ok with changing font color
 timeAndDate = `<p style="color:blue; padding-top:1em;">It is currently ${time} </p>`
@@ -60,6 +60,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             recipesDisplay(response)
+            // console.log(response);
 
         })
     }
@@ -96,7 +97,7 @@ $(document).ready(function () {
                 let latitiude = response.coord.lat;
                 let cityName = response.name;
                 console.log("long :" + longitude + " lat :" + latitiude + " name: " + cityName);
-                zomatoRestaurantCall(latitiude, longitude)
+                zomatoRestaurantCall(latitiude, longitude);
 
             });
     };
@@ -104,10 +105,13 @@ $(document).ready(function () {
     // ----------------------------zomato------------------------------
     function zomatoRestaurantCall(latitiude, longitude) {
 
+        // https://developers.zomato.com/api/v2.1/search?count=10&lat=33.34&lon=-111.74
+
         const zomatoApiKey = "8ed1b92667f3ee82f4a77b02be24cf26";
-        const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?q="
+        // const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?q="
+        const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?"
         var searchFood = $("#foodInput").val();
-        const zomatoSearchCount = "&count=10"
+        const zomatoSearchCount = "count=5"
         const zomatoLat = "&lat=" + latitiude
         const zomatoLon = "&lon=" + longitude
         $.ajax({
@@ -115,21 +119,36 @@ $(document).ready(function () {
                 "Accept": "application/json",
                 "user-key": zomatoApiKey
             },
-            url: zomatoQueryUrl + searchFood + zomatoSearchCount + zomatoLat + zomatoLon,
+            url: zomatoQueryUrl + zomatoSearchCount + zomatoLat + zomatoLon,
             // "https://developers.zomato.com/api/v2.1/search?q=burger&count=10&lat=33.427204&lon=-111.939896",
             method: "GET"
         })
 
             .then(function (searchResponse) {
+                restaurantDisplapy(searchResponse);
 
-                console.log(searchResponse);
-                console.log(searchResponse.restaurants)
-                console.log(searchResponse.restaurants[0])
-                console.log(searchResponse.restaurants[0].restaurant.name)
-                console.log(searchResponse.restaurants[0].restaurant.url)
-                console.log(searchResponse.restaurants[0].restaurant.location.address)
-                console.log(searchResponse.restaurants[0].restaurant.highlights)
+               
             });
+
+            function restaurantDisplapy(responseZtom){
+                responseZtom.restaurants.forEach(function (hit) {
+                    var restaurantResult = hit.restaurant;
+                    // console.log(restaurantResult);
+                    
+                    var restaurantNameDisplay = $("<h3>").text(restaurantResult.name).attr("data-aos", "flip-left")
+                    // var dropDownRestaurantNameDisplay = $("<h3>").text(searchResponse.restaurants[i].restaurant.name).attr("data-aos", "flip-right")
+                    var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-primary").attr("type", "button").attr("uk-toggle", "target: #restaurant-modal").click(function () {
+                            $("#restaurantModalTitle").text(restaurantResult.name)
+                            $("#restaurantModalLink").attr("href", restaurantResult.url)
+                            $("#restaurantModalLocation").text("Location: " + restaurantResult.location.address)
+                            $("#restaurantModalRatingModalRating").text("User rating : " + restaurantResult.user_rating.rating_text);
+                            $("#restaurantModalImage").attr("src", restaurantResult.photos[0].photo.thumb_url).attr("alt", "picture of local food");
+                    })
+        
+                    $("#restaurantDisplay").append(restaurantNameDisplay, modalButton)
+                })  
+
+            };
     }
     function coinTossOption() {
         var coinTossOptions = ["Hmm...Eating out sound so good right now", "Cook sound fun today!!", "Lets go out to.....", "Lets make some delicious meal today!!"]
