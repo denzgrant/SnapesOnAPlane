@@ -37,6 +37,23 @@
 
         </div>
     </div>
+    <div id="restaurant-modal" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 id="restaurantModalTitle"class="uk-modal-title">Modal Title</h2>
+            </div>
+            <div class="uk-modal-body">
+               <ul>
+                   <li><a id="restaurantModalLink">full restaurant details:</a></li>
+                   <li id="restaurantModalLocation"></li>
+                   <li id="restaurantModalRatingModalRating"></li>
+                   <li><img id="restaurantModalImage"></li>
+               </ul>
+            </div>
+
+        </div>
+    </div>
     <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
@@ -60,20 +77,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="uk-inline">
-                    <button class="uk-button uk-button-default uk-margin-small-right" type="button"
-                        uk-toggle="target: #cantDecide">Having Trouble?</button>
-
-                    <div id="cantDecide" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <div class="uk-card uk-card-body uk-card-default">
-                                <p id="coinTossDisplay">Let us help you decide <span uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Click Here</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                
             </ul>
         </div>
 
@@ -124,13 +128,15 @@
             <div class="row">
                 <div class="uk-child-width-expand@s uk-grid-divider " uk-grid>
 
-                    <div id="recipesDispaly" >
+                    <div>
+                        <div id="recipesDispaly" ></div>
                        
                         
 
                     </div>
                   
-                    <div id="restaurantDisplay" >
+                    <div >
+                        <div id="restaurantDisplay"> </div>
                         
 
                     </div>
@@ -147,7 +153,6 @@
         <footer class="uk-padding-small uk-sticky='bottom: true'">
             <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
         </footer>
-        <!-- <script src="script.js"></script>  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="main.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
