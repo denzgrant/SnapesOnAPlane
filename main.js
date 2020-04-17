@@ -71,7 +71,7 @@ $(document).ready(function () {
                 $("#recipeModalDiet").text("Diet Labels: " + recipesResult.dietLabels)
                 $("#recipeModalHealth").text("Health Labels: " + recipesResult.healthLabels);
                 $("#recipeModalImage").attr("src", recipesResult.image).attr("alt", recipesResult.label);
-                
+
             })
 
             $("#recipesDispaly").append(recipesNameDisplay, modalButton)
@@ -93,12 +93,12 @@ $(document).ready(function () {
                 let latitiude = response.coord.lat;
                 let cityName = response.name;
                 console.log("long :" + longitude + " lat :" + latitiude + " name: " + cityName);
-        
+
                 zomatoRestaurantCall(latitiude, longitude);
-                
+
 
             });
-            
+
     };
 
     // ----------------------------zomato------------------------------
@@ -116,42 +116,42 @@ $(document).ready(function () {
                 "Accept": "application/json",
                 "user-key": zomatoApiKey
             },
-            
+
             url: zomatoQueryUrl + searchFood + zomatoSearchCount + zomatoLat + zomatoLon,
             method: "GET"
         })
 
             .then(function (searchResponse) {
                 let responseValue = searchResponse.results_found
-                if (responseValue < 5 ) {
-                    UIkit.notification({ message: `<p style="color: #1e87f0;"><strong>Sorry these are the only results. Here are resturants near you</strong></p>` })
-                    let zSearchCount = 5-responseValue
+                if (responseValue < 5) {
+                    
+                    let zSearchCount = 5 - responseValue
                     zomatoRestaurantCallBakcup(latitiude, longitude, zSearchCount)
                     restaurantDisplapy(searchResponse)
 
-                }else {
+                } else {
                     restaurantDisplapy(searchResponse);
                 }
-                
+
             });
 
 
     }
-    function zomatoRestaurantCallBakcup(latitiude, longitude, zSearchCount=5) {
+    function zomatoRestaurantCallBakcup(latitiude, longitude, zSearchCount = 5) {
 
         const zomatoApiKey = "8ed1b92667f3ee82f4a77b02be24cf26";
         const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?"
-        const zomatoSearchCount = "&count=" +zSearchCount
+        const zomatoSearchCount = "&count=" + zSearchCount
         // var searchFood = $("#foodInput").val().trim().toLowerCase();
         const zomatoLat = "&lat=" + latitiude
         const zomatoLon = "&lon=" + longitude
-       
+
         $.ajax({
             headers: {
                 "Accept": "application/json",
                 "user-key": zomatoApiKey
             },
-            
+
             url: zomatoQueryUrl + zomatoSearchCount + zomatoLat + zomatoLon,
             // "https://developers.zomato.com/api/v2.1/search?q=burger&count=10&lat=33.427204&lon=-111.939896",
             method: "GET"
@@ -163,12 +163,12 @@ $(document).ready(function () {
 
 
     }
-    
+
 
     function restaurantDisplapy(responseZtom) {
         responseZtom.restaurants.forEach(function (hit) {
             var restaurantResult = hit.restaurant;
-            
+            console.log(restaurantResult)
 
             var restaurantNameDisplay = $("<h3>").text(restaurantResult.name).attr("data-aos", "flip-right")
             var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-secondary").attr("type", "button").attr("uk-toggle", "target: #restaurant-modal").click(function () {
@@ -176,7 +176,13 @@ $(document).ready(function () {
                 $("#restaurantModalLink").attr("href", restaurantResult.url)
                 $("#restaurantModalLocation").text("Location: " + restaurantResult.location.address)
                 $("#restaurantModalRatingModalRating").text("User rating : " + restaurantResult.user_rating.rating_text);
-                $("#restaurantModalImage").attr("src", restaurantResult.photos[0].photo.thumb_url).attr("alt", "picture of local food");
+                if (restaurantResult.photos) {
+                    $("#restaurantModalImage").attr("src", restaurantResult.photos[0].photo.thumb_url).attr("alt", "picture of local food");
+                } else {
+                    $("#restaurantModalImage").attr("src", "http://placekitten.com/g/300/300").attr("alt", "picture of cute cat")
+                }
+
+
             })
 
             $("#restaurantDisplay").append(restaurantNameDisplay, modalButton)
