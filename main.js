@@ -1,37 +1,49 @@
 const time = moment().format("MMM Do YYYY, h:mm a");
 const currentHour = moment().format("H");
+console.log(currentHour); 
 //Displays Current TIme
 timeAndDate = `<p style="color:blue; padding-top:1em;">It is currently ${time} </p>`;
 $("#time").append(timeAndDate);
 
 switch (true) {
-  //Customized Message depending on time of day
-  case currentHour > "3" && currentHour < "6":
-    $("#time").append("Prebreakfast is underrated");
-    break;
-  case currentHour >= "6" && currentHour <= "9":
-    $("#time").append(
-      "Time to break the fast. My friends from the Shire is inquring about second breakfast"
-    );
-    break;
-  case currentHour > "9" && currentHour < "11":
-    $("#time").append("Break out the mimosas, I'm ready for brunch");
-    break;
-  case currentHour >= "11" && currentHour <= "13":
-    $("#time").append("It's finally here, time for lunch!");
-    break;
-  case currentHour > "13" && currentHour < "18":
-    $("#time").append("Snackin' is more than a hobby, it's a lifetyle");
-    break;
-  case currentHour >= "18" && currentHour < "22":
-    $("#time").append("Afternoon snacks are a requirement");
-    break;
-  case currentHour >= "22" && currentHour < "24":
-    $("#time").append("Time for a late night snack!");
-    break;
+    //Customized Message depending on time of day
+    case currentHour > "3" && currentHour < "6":
+        $("#time").append("Prebreakfast is underrated");
+        break;
+    case currentHour >= "6" && currentHour <= "9":
+        $("#time").append(
+            "Time to break the fast. My friends from the Shire is inquring about second breakfast"
+        );
+        break;
+    case currentHour == "10" && currentHour < "11":
+        $("#time").append("Break out the mimosas, I'm ready for brunch");
+        break;
+    case currentHour >= "11" && currentHour <= "13":
+        $("#time").append("It's finally here, time for lunch!");
+        break;
+    case currentHour > "13" && currentHour < "18":
+        $("#time").append("Snackin' is more than a hobby, it's a lifetyle");
+        break;
+    case currentHour >= "18" && currentHour < "22":
+        $("#time").append("Afternoon snacks are a requirement");
+        break;
+    case currentHour >= "22" && currentHour < "24":
+        $("#time").append("Time for a late night snack!");
+        break;
 }
 
 $(document).ready(function () {
+    //Displaying Recent Search
+    (function previousSearch() {
+        let previousFood = localStorage.getItem("PrevFoodSearch");
+        let previousZomLon = localStorage.getItem("PrevZomLon");
+        let previousZomLat = localStorage.getItem("PrevZomLat");
+        recipesCall(previousFood);
+
+        searchFood = $("#foodInput").val(previousFood)
+        zomatoRestaurantCall(previousZomLat, previousZomLon, searchFood)
+
+    })();
 
     $("#searchBtn").on("click", function (zipCode, searchFood) {
         $("#recipesDispaly").empty();
@@ -82,6 +94,7 @@ $(document).ready(function () {
 
 
     }
+    //Converting Zip Code input into latitude and longitude 
     function getLatLon(zipCode) {
         let openWeatherapiKey = "&appid=b52ce1773e76080cb950272fcf749391";
 
@@ -92,11 +105,10 @@ $(document).ready(function () {
         })
             .then(function (response) {
                 let longitude = response.coord.lon;
-                let latitiude = response.coord.lat;
+                let latitude = response.coord.lat;
                 let cityName = response.name;
-                console.log("long :" + longitude + " lat :" + latitiude + " name: " + cityName);
 
-                zomatoRestaurantCall(latitiude, longitude);
+                zomatoRestaurantCall(latitude, longitude);
 
 
             });
@@ -104,15 +116,18 @@ $(document).ready(function () {
     };
 
     // ----------------------------zomato------------------------------
-    function zomatoRestaurantCall(latitiude, longitude) {
+    function zomatoRestaurantCall(latitude, longitude, searchFood) {
 
         const zomatoApiKey = "8ed1b92667f3ee82f4a77b02be24cf26";
         const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?q="
-        var searchFood = $("#foodInput").val().trim().toLowerCase();
+        searchFood = $("#foodInput").val().trim().toLowerCase();
         const zomatoSearchCount = "&count=5"
-        const zomatoLat = "&lat=" + latitiude
+        const zomatoLat = "&lat=" + latitude
         const zomatoLon = "&lon=" + longitude
-        console.log(searchFood)
+        localStorage.setItem("PrevFoodSearch", searchFood);
+        localStorage.setItem("PrevZomLat", zomatoLat);
+        localStorage.setItem("PrevZomLon", zomatoLon);
+
         $.ajax({
             headers: {
                 "Accept": "application/json",
@@ -126,9 +141,9 @@ $(document).ready(function () {
             .then(function (searchResponse) {
                 let responseValue = searchResponse.results_found
                 if (responseValue < 5) {
-                    
+
                     let zSearchCount = 5 - responseValue
-                    zomatoRestaurantCallBakcup(latitiude, longitude, zSearchCount)
+                    zomatoRestaurantCallBakcup(latitude, longitude, zSearchCount)
                     restaurantDisplapy(searchResponse)
 
                 } else {
@@ -139,13 +154,13 @@ $(document).ready(function () {
 
 
     }
-    function zomatoRestaurantCallBakcup(latitiude, longitude, zSearchCount = 5) {
+
+    function zomatoRestaurantCallBakcup(latitude, longitude, zSearchCount = 5) {
 
         const zomatoApiKey = "8ed1b92667f3ee82f4a77b02be24cf26";
         const zomatoQueryUrl = "https://developers.zomato.com/api/v2.1/search?"
         const zomatoSearchCount = "&count=" + zSearchCount
-        // var searchFood = $("#foodInput").val().trim().toLowerCase();
-        const zomatoLat = "&lat=" + latitiude
+        const zomatoLat = "&lat=" + latitude
         const zomatoLon = "&lon=" + longitude
 
         $.ajax({
@@ -155,7 +170,6 @@ $(document).ready(function () {
             },
 
             url: zomatoQueryUrl + zomatoSearchCount + zomatoLat + zomatoLon,
-            // "https://developers.zomato.com/api/v2.1/search?q=burger&count=10&lat=33.427204&lon=-111.939896",
             method: "GET"
         })
 
@@ -166,11 +180,10 @@ $(document).ready(function () {
 
     }
 
-
+    //Displaying Restuarant Information 
     function restaurantDisplapy(responseZtom) {
         responseZtom.restaurants.forEach(function (hit) {
             var restaurantResult = hit.restaurant;
-            console.log(restaurantResult)
 
             var restaurantNameDisplay = $("<h3>").text(restaurantResult.name).attr("data-aos", "flip-right")
             var modalButton = $("<button>").text("Check here for Details").addClass("uk-button uk-button-secondary").attr("type", "button").attr("uk-toggle", "target: #restaurant-modal").click(function () {
