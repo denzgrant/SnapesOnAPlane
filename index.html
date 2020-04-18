@@ -28,7 +28,7 @@
             </div>
             <div class="uk-modal-body">
                <ul>
-                   <li><a id="recipeModalLink">check out recipe:</a></li>
+                   <li><a id="recipeModalLink">Check Out Recipe</a></li>
                    <li id="recipeModalDiet"></li>
                    <li id="recipeModalHealth"></li>
                    <li><img id="recipeModalImage"></li>
@@ -45,7 +45,7 @@
             </div>
             <div class="uk-modal-body">
                <ul>
-                   <li><a id="restaurantModalLink">full restaurant details:</a></li>
+                   <li><a id="restaurantModalLink">Full Restaurant Details</a></li>
                    <li id="restaurantModalLocation"></li>
                    <li id="restaurantModalRatingModalRating"></li>
                    <li><img id="restaurantModalImage"></li>
@@ -72,25 +72,12 @@
                     <div id="aboutUs" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <p>Hi There! This is a simple site made by U of A bootcamp students, Denzell, Hoover
-                                and Michelle. This is our first project. I hope you like it.</p>
+                            <p>Hi There! This is a simple site made by University of Arizona bootcamp students: Denzell, Hoover
+                                and Michelle. This is our first project. I hope you enjoy it.</p>
                         </div>
                     </div>
                 </li>
-                <li class="uk-inline">
-                    <button class="uk-button uk-button-default uk-margin-small-right" type="button"
-                        uk-toggle="target: #cantDecide">Having Trouble?</button>
-
-                    <div id="cantDecide" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <div class="uk-card uk-card-body uk-card-default">
-                                <p id="coinTossDisplay">Let us help you decide <span uk-icon="icon: happy"></span></p>
-                                <button id="coinToss" class="uk-button uk-button-primary">Click Here</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                
             </ul>
         </div>
 
@@ -103,7 +90,7 @@
 
         <dl data-aos="fade-down" class="uk-description-list uk-description-list-divider uk-overlay">
             <dt class="uk-text-primary uk-text-center "></dt>
-            <dd class="uk-text-center">Making decision for what to eat is always hard. This is a simple website that
+            <dd class="uk-text-center">Making a decision for what to eat is always hard. This is a simple website that
                 help
                 you decide what to eat today.
                 <div id="time" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
@@ -117,7 +104,7 @@
             <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover"
                 data-src="https://www.thespruceeats.com/thmb/LV4VRAPdilCLCQj7mi4m8PFxczI=/2164x1386/filters:fill(auto,1)/freshvegetablesAlexRaths-4c1ea186a88e4fd7b95283eee614600c.jpg"
                 uk-img>
-                <div id="searchSection">
+                <div id="searchSection"  >
                     <div class="uk-inline">
                         <label>
                             <span class="uk-form-icon" uk-icon="icon:search"></span>
@@ -132,7 +119,7 @@
                                 placeholder="zip code">
                         </label>
                     </div>
-                    <input id="searchBtn" type="submit" class="uk-button uk-button-primary" value="Search">
+                    <input id="searchBtn" type="submit" class="uk-button uk-button-primary " value="Search">
                 </div>
             </div>
 
@@ -141,13 +128,17 @@
             <div class="row">
                 <div class="uk-child-width-expand@s uk-grid-divider " uk-grid>
 
-                    <div id="recipesDispaly" >
+                    <div>
+                        <h4 data-aos="flip-up">Recipes</h4>
+                        <div id="recipesDispaly" ></div>
                        
                         
 
                     </div>
                   
-                    <div id="restaurantDisplay" >
+                    <div >
+                        <h4 data-aos="flip-up">Restaurants</h4>
+                        <div id="restaurantDisplay"> </div>
                         
 
                     </div>
@@ -164,7 +155,6 @@
         <footer class="uk-padding-small uk-sticky='bottom: true'">
             <h6 class="uk-text-center">Made with lots of <span uk-icon="icon: heart"></span></h6>
         </footer>
-        <!-- <script src="script.js"></script>  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="main.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
