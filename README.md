@@ -14,7 +14,7 @@
 - As a user, if my search term returns limited restaurant results (<5), I want the application to supplement those results with a search of my zip code only.
 
 
-## Libaries used:
+## Libraries used:
 #### :man_artist: CSS Frameworks: :woman_artist:
 >
 > - UIKit
