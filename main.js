@@ -120,9 +120,10 @@ $(document).ready(function () {
             });
 
             function restaurantDisplapy(responseZtom){
+                restaurants[""0""].restaurant.location.city_id
                 responseZtom.restaurants.forEach(function (hit) {
                     var restaurantResult = hit.restaurant;
-                    // console.log(restaurantResult);
+                    
                     
                     var restaurantNameDisplay = $("<h3>").text(restaurantResult.name).attr("data-aos", "flip-left")
                     // var dropDownRestaurantNameDisplay = $("<h3>").text(searchResponse.restaurants[i].restaurant.name).attr("data-aos", "flip-right")
@@ -132,6 +133,7 @@ $(document).ready(function () {
                             $("#restaurantModalLocation").text("Location: " + restaurantResult.location.address)
                             $("#restaurantModalRatingModalRating").text("User rating : " + restaurantResult.user_rating.rating_text);
                             $("#restaurantModalImage").attr("src", restaurantResult.photos[0].photo.thumb_url).attr("alt", "picture of local food");
+                            
                     })
         
                     $("#restaurantDisplay").append(restaurantNameDisplay, modalButton)
