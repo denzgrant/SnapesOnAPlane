@@ -26,9 +26,9 @@
 3. Open Weather Map-https://openweathermap.org/
 
 #### Third-Party API used :computer: : 
-1. Jquery
+1. jQuery
 2. Moment.js
-3. AOS- Animate On Scroll Libary
+3. AOS- Animate On Scroll Library
 
 
 
